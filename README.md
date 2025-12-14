@@ -109,6 +109,30 @@ GPU acceleration enabled faster experimentation and more stable convergence.
 Balanced precision and recall across all classes confirm strong generalization.
 
 ---
+## 🔍 Base Transfer Learning vs Fine-Tuning
+
+This project was trained in two distinct phases to analyze the impact of fine-tuning on model performance.
+
+### 1️⃣ Base Transfer Learning (Frozen Backbone)
+- The ResNet50 backbone was kept frozen.
+- Only the custom classification head was trained.
+- The model acted as a generic feature extractor using ImageNet weights.
+- This phase achieved strong and stable generalization performance.
+
+### 2️⃣ Fine-Tuning (Partial Backbone Unfrozen)
+- Upper layers of ResNet50 were unfrozen.
+- Training continued with a very low learning rate.
+- Training and validation accuracy increased significantly (up to ~99%).
+
+However, despite the high validation accuracy during fine-tuning, the **final test accuracy stabilized around ~90%**.
+
+📌 **Key Insight**
+
+Fine-tuning improves dataset-specific representations rather than overall generalization.  
+In this project, the base transfer learning model had already captured the most generalizable visual patterns. Fine-tuning mainly refined decision boundaries within the training distribution.
+
+This behavior indicates **healthy model generalization**, not a performance issue. The final model prioritizes robustness on unseen data over memorization.
+
 
 ## 📊 Evaluation & Diagnostics
 
